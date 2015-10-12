@@ -7,6 +7,9 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>Jenkins Maven Webapp</name>
   <url>http://maven.apache.org</url>
+  <properties>
+  <jdk.version>1.7</jdk.version>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -17,5 +20,30 @@
   </dependencies>
   <build>
     <finalName>Jenkins</finalName>
+    <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jboss.as.plugins</groupId>
+                <artifactId>jboss-as-maven-plugin</artifactId>
+                <version>7.1.1.Final</version>
+                <executions>
+                    <execution>
+                        <id>deploy-jar</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
   </build>
 </project>
